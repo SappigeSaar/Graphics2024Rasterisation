@@ -1,6 +1,7 @@
 Team members: (names and student IDs)
 * ...
 * Blossom de Ruiter 7772777
+* Saar van Netburg 7515960
 
 Tick the boxes below for the implemented features. Add a brief note only if necessary, e.g., if it's only partially working, or how to turn it on.
 
