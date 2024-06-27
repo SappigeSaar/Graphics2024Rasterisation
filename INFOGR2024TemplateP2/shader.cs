@@ -14,6 +14,8 @@ namespace Template
         public int uniform_objectToScreen;
         public int uniform_objectToWorld;
 
+        public int uniform_cameraWorld;
+
         // constructor
         public Shader(string vertexShader, string fragmentShader)
         {
@@ -32,6 +34,8 @@ namespace Template
             in_vertexUV = GL.GetAttribLocation(programID, "vertexUV");
             uniform_objectToScreen = GL.GetUniformLocation(programID, "objectToScreen");
             uniform_objectToWorld = GL.GetUniformLocation(programID, "objectToWorld");
+
+            uniform_cameraWorld = GL.GetUniformLocation(programID, "cameraWorld");
         }
 
         // loading shaders

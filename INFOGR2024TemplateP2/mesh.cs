@@ -16,13 +16,19 @@ namespace Template
         int vertexBufferId;                     // vertex buffer object (VBO) for vertex data
         int triangleBufferId;                   // element buffer object (EBO) for triangle vertex indices
         int quadBufferId;                       // element buffer object (EBO) for quad vertex indices (not in Modern OpenGL)
+        
+        public Matrix4 modelMatrix = Matrix4.Identity;
+        public Texture texture;
 
         // constructor
-        public Mesh(string filename)
+        public Mesh(string filename, Matrix4 transform, Texture texture)
         {
             this.filename = filename;
             MeshLoader loader = new();
             loader.Load(this, filename);
+
+            modelMatrix *= transform;
+            this.texture = texture;
         }
 
         // initialization; called during first render
@@ -54,7 +60,7 @@ namespace Template
         }
 
         // render the mesh using the supplied shader and matrix
-        public void Render(Shader shader, Matrix4 objectToScreen, Matrix4 objectToWorld, Texture texture)
+        public void Render(Camera camera, Shader shader, Matrix4 objectToScreen, Matrix4 objectToWorld)
         {
             // on first run, prepare buffers
             Prepare();
@@ -72,6 +78,8 @@ namespace Template
             // pass transforms to vertex shader
             GL.UniformMatrix4(shader.uniform_objectToScreen, false, ref objectToScreen);
             GL.UniformMatrix4(shader.uniform_objectToWorld, false, ref objectToWorld);
+            
+            GL.Uniform4(shader.uniform_cameraWorld, new Vector4(camera.position, 0));
 
             // enable position, normal and uv attribute arrays corresponding to the shader "in" variables
             GL.EnableVertexAttribArray(shader.in_vertexPositionObject);

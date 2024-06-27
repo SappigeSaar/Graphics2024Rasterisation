@@ -139,6 +139,12 @@ namespace Template
             // called once per frame; app logic
             var keyboard = KeyboardState;
             if (keyboard[Keys.Escape]) terminated = true;
+
+            //put all the movement stuff
+            MoveCamera(e);
+
+            RotateCamera();
+
         }
         protected override void OnRenderFrame(FrameEventArgs e)
         {
@@ -199,6 +205,35 @@ namespace Template
             using OpenTKApp app = new();
             app.UpdateFrequency = 30.0;
             app.Run();
+        }
+
+        /// <summary>
+        /// moves the position of the camera around based on WASD keys
+        /// </summary>
+        private void MoveCamera(FrameEventArgs e)
+        {
+            var keyboard = KeyboardState;
+            Vector3 cameraTranslation = new Vector3();
+
+            if (keyboard[Keys.W]) cameraTranslation += (0, 0, 0.0001f);
+            if (keyboard[Keys.A]) cameraTranslation += (-0.0001f, 0, 0);
+            if (keyboard[Keys.S]) cameraTranslation += (0, 0, -0.0001f);
+            if (keyboard[Keys.D]) cameraTranslation += (0.0001f, 0, 0);
+
+            if (keyboard[Keys.LeftShift]) cameraTranslation += (0, -0.0001f, 0);
+            if (keyboard[Keys.Space]) cameraTranslation += (0, 0.0001f, 0);
+
+            app.camera.Translate(cameraTranslation);
+        }
+
+        private void RotateCamera()
+        {
+            var keyboard = KeyboardState;
+            if (keyboard[Keys.Up]) app.camera.RotateX(-0.0000001f);
+            if (keyboard[Keys.Down]) app.camera.RotateX(0.0000001f);
+            if (keyboard[Keys.Left]) app.camera.RotateZ(-0.0000001f);
+            if (keyboard[Keys.Right]) app.camera.RotateZ(0.0000001f);
+
         }
     }
 }

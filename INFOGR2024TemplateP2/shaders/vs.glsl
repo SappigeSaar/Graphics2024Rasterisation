@@ -6,12 +6,15 @@ in vec3 vertexNormalObject;		// vertex normal in Object Space
 in vec2 vertexUV;				// vertex uv texture coordinates
 uniform mat4 objectToScreen;
 uniform mat4 objectToWorld;
+uniform vec4 cameraWorld;
 
 // shader outputs, will be interpolated from vertices to fragments
 out vec4 positionWorld;			// vertex position in World Space
 out vec4 normalWorld;			// vertex normal in World Space
 out vec2 uv;					// vertex uv texture coordinates (pass-through)
- 
+out vec4 cameraWorldPosition;
+
+
 // vertex shader
 void main()
 {
@@ -23,4 +26,6 @@ void main()
 	normalWorld = inverse(transpose(objectToWorld)) * vec4(vertexNormalObject, 0.0f);
 	// pass the uv coordinate
 	uv = vertexUV;
+
+	cameraWorldPosition = cameraWorld;
 }
