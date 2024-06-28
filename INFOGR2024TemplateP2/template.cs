@@ -144,7 +144,7 @@ namespace Template
             //put all the movement stuff
             MoveCamera(keyboard);
 
-            //RotateCamera();
+            RotateCamera(keyboard);
 
         }
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -217,24 +217,23 @@ namespace Template
             Vector3 cameraTranslation = new Vector3();
 
             if (keyboard[Keys.W]) 
-                cameraTranslation += (0, 0, 0.0001f);
-            if (keyboard[Keys.A]) cameraTranslation += (-0.0001f, 0, 0);
-            if (keyboard[Keys.S]) cameraTranslation += (0, 0, -0.0001f);
-            if (keyboard[Keys.D]) cameraTranslation += (0.0001f, 0, 0);
+                cameraTranslation += (0, 0, 1f);
+            if (keyboard[Keys.A]) cameraTranslation += (-1f, 0, 0);
+            if (keyboard[Keys.S]) cameraTranslation += (0, 0, -1f);
+            if (keyboard[Keys.D]) cameraTranslation += (1f, 0, 0);
 
-            if (keyboard[Keys.LeftShift]) cameraTranslation += (0, -0.0001f, 0);
-            if (keyboard[Keys.Space]) cameraTranslation += (0, 0.0001f, 0);
+            if (keyboard[Keys.LeftShift]) cameraTranslation += (0, -1f, 0);
+            if (keyboard[Keys.Space]) cameraTranslation += (0, 1f, 0);
 
             app.camera.Translate(cameraTranslation);
         }
 
-        private void RotateCamera()
+        private void RotateCamera(KeyboardState? keyboard)
         {
-            var keyboard = KeyboardState;
-            if (keyboard[Keys.Up]) app.camera.RotateX(-0.0000001f);
-            if (keyboard[Keys.Down]) app.camera.RotateX(0.0000001f);
-            if (keyboard[Keys.Left]) app.camera.RotateZ(-0.0000001f);
-            if (keyboard[Keys.Right]) app.camera.RotateZ(0.0000001f);
+            if (keyboard[Keys.Up]) app.camera.RotateX(-0.02f);
+            if (keyboard[Keys.Down]) app.camera.RotateX(0.02f);
+            if (keyboard[Keys.Left]) app.camera.RotateY(-0.02f);
+            if (keyboard[Keys.Right]) app.camera.RotateY(0.02f);
 
         }
     }
