@@ -125,7 +125,7 @@ namespace Template
             base.OnResize(e);
             // called upon window resize. Note: does not change the size of the pixel buffer.
             int retinaScale = isMac ? 2 : 1; // this code assumes all Macs have retina displays
-            app.SceneGraph.screenSize = ClientSize;
+            app.sceneGraph.screenSize = ClientSize;
             GL.Viewport(0, 0, retinaScale * e.Width, retinaScale * e.Height);
             if (allowPrehistoricOpenGL)
             {
@@ -141,9 +141,8 @@ namespace Template
             var keyboard = KeyboardState;
             if (keyboard[Keys.Escape]) terminated = true;
 
-            //put all the movement stuff
+            //move the camera based on keyboard directions
             MoveCamera(keyboard);
-
             RotateCamera(keyboard);
 
         }
@@ -199,6 +198,7 @@ namespace Template
             // tell OpenTK we're done rendering
             SwapBuffers();
         }
+        
         public static void Main()
         {
             // entry point
@@ -228,6 +228,10 @@ namespace Template
             app.camera.Translate(cameraTranslation);
         }
 
+        /// <summary>
+        /// rotates the camera based on the arrow keys
+        /// </summary>
+        /// <param name="keyboard"></param>
         private void RotateCamera(KeyboardState? keyboard)
         {
             if (keyboard[Keys.Up]) app.camera.RotateX(-0.02f);

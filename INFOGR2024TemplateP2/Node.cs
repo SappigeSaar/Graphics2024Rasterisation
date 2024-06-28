@@ -13,6 +13,10 @@ namespace Template
         private Mesh? mesh;
         public List<Node> leaves;
 
+        /// <summary>
+        /// create a node with a mesh
+        /// </summary>
+        /// <param name="mesh"></param>
         public Node (Mesh mesh)
         {
             this.mesh = mesh;
@@ -20,11 +24,23 @@ namespace Template
             this.leaves = new List<Node>();
         }
 
+        /// <summary>
+        /// create a node with leaves
+        /// </summary>
+        /// <param name="leaves"></param>
         public Node(List<Node> leaves)
         {
             this.leaves = leaves;
             objectToParent = Matrix4.Identity;
         }
+
+        /// <summary>
+        /// render this node and all its children
+        /// </summary>
+        /// <param name="camera"></param>
+        /// <param name="shader"></param>
+        /// <param name="worldToScreen"></param>
+        /// <param name="parentTransformation"></param>
         public void Render(Camera camera, Shader shader, Matrix4 worldToScreen, Matrix4 parentTransformation)
         {
             Matrix4 objectToWorld = objectToParent * parentTransformation;

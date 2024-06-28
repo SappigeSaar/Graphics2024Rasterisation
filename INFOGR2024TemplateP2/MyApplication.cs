@@ -17,8 +17,9 @@ namespace Template
         ScreenQuad? quad;                       // screen filling quad for post processing
         readonly bool useRenderTarget = true;   // required for post processing
 
-        public SceneGraph? SceneGraph;
+        public SceneGraph? sceneGraph;
         public Camera camera = new Camera();
+
         // constructor
         public MyApplication(Surface screen)
         {
@@ -30,7 +31,7 @@ namespace Template
             // load nodes
             Node scene = new Node(new List<Node>());
 
-            SceneGraph = new SceneGraph(scene);
+            sceneGraph = new SceneGraph(scene);
 
             // load a texture
             wood1 = new Texture("../../../assets/wood.jpg");
@@ -71,19 +72,10 @@ namespace Template
             float frameDuration = timer.ElapsedMilliseconds;
             timer.Reset();
             timer.Start();
-            //THISIS EVERY FRAME
-
-            // prepare matrix for vertex shader
-            float angle90degrees = MathF.PI / 2;
-
-            //Matrix4 teapotObjectToWorld = Matrix4.CreateScale(0.5f) * Matrix4.CreateFromAxisAngle(new Vector3(0, 1, 0), a);
-            //Matrix4 floorObjectToWorld = Matrix4.CreateScale(4.0f) * Matrix4.CreateFromAxisAngle(new Vector3(0, 1, 0), a);
-            //Matrix4 worldToCamera = Matrix4.CreateTranslation(new Vector3(0, -14.5f, 0)) * Matrix4.CreateFromAxisAngle(new Vector3(1, 0, 0), angle90degrees);
-            //Matrix4 cameraToScreen = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(60.0f), (float)screen.width/screen.height, .1f, 1000);
+            //THIS IS EVERY FRAME
 
             // update rotation
-            a += 0.001f * frameDuration;
-            if (a > 2 * MathF.PI) a -= 2 * MathF.PI;
+            RotateTeapot(frameDuration);
 
             if (useRenderTarget && target != null && quad != null)
             {
@@ -93,9 +85,7 @@ namespace Template
                 // render scene to render target
                 if (shader != null && wood1 != null && wood2 != null)
                 {
-                    SceneGraph.Render(camera, shader);
-                    //teapot?.Render(shader, teapotObjectToWorld * worldToCamera * cameraToScreen, teapotObjectToWorld, wood);
-                    //floor?.Render(shader, floorObjectToWorld * worldToCamera * cameraToScreen, floorObjectToWorld, wood);
+                    sceneGraph.Render(camera, shader);
                 }
 
                 // render quad
@@ -108,11 +98,24 @@ namespace Template
                 // render scene directly to the screen
                 if (shader != null && wood1 != null && wood2 != null)
                 {
-                    SceneGraph.Render(camera, shader);
-                    //teapot?.Render(shader, teapotObjectToWorld * worldToCamera * cameraToScreen, teapotObjectToWorld, wood);
-                    //floor?.Render(shader, floorObjectToWorld * worldToCamera * cameraToScreen, floorObjectToWorld, wood);
+                    sceneGraph.Render(camera, shader);
                 }
             }
+        }
+
+        /// <summary>
+        /// rotate the teapot
+        /// </summary>
+        /// <param name="frameDuration"></param>
+        private void RotateTeapot(float frameDuration)
+        {
+            a += 0.001f * frameDuration;
+            if (a > 0.09)
+                a -= 0.001f * frameDuration;
+
+            Matrix4 relativePosition = sceneGraph.sceneNode.leaves[0].objectToParent;
+            Matrix4 potRotation =  Matrix4.CreateFromAxisAngle(new Vector3(0, 1, 0), a) * relativePosition;
+            sceneGraph.sceneNode.leaves[0].objectToParent = potRotation;
         }
     }
 }

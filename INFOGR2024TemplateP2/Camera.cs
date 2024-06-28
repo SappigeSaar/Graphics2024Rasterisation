@@ -24,19 +24,22 @@ namespace Template
             inDirection = (0, 0, -1);
         }
 
-        //updates camera position
+        /// <summary>
+        /// changes the camera's position based on the given direcion
+        /// </summary>
+        /// <param name="direction"></param>
         public void Translate(Vector3 direction)
         {
             position -= direction.X * rightDirection + direction.Y * upDirection + direction.Z * - inDirection;
         }
         
         /// <summary>
-        /// rotate viewing direction around X axis
+        /// rotates the viewing direction around X axis
         /// </summary>
-        /// <param name="x"></param>
-        public void RotateX(float x)
+        /// <param name="angle">the angle of the rotation</param>
+        public void RotateX(float angle)
         {
-            Matrix3 rotation = Matrix3.CreateRotationX(x);
+            Matrix3 rotation = Matrix3.CreateRotationX(angle);
             upDirection *= rotation;
             rightDirection *= rotation;
             inDirection *= rotation;
@@ -45,10 +48,10 @@ namespace Template
         /// <summary>
         /// rotate viewing direction around Y axis
         /// </summary>
-        /// <param name="x"></param>
-        public void RotateY(float x)
+        /// <param name="angle">the angl;e of the rotation</param>
+        public void RotateY(float angle)
         {
-            Matrix3 rotation = Matrix3.CreateRotationY(x);
+            Matrix3 rotation = Matrix3.CreateRotationY(angle);
             upDirection *= rotation;
             rightDirection *= rotation;
             inDirection *= rotation;
