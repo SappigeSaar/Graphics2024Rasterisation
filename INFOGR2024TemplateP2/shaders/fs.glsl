@@ -14,7 +14,7 @@ out vec4 outputColor;
 void main()
 {
     vec4 positionLight = vec4(100.0, 0.0, 0.0, 0.0);
-    float intensity = 9000.0;
+    float intensity = 90000.0;
 
     vec4 directionLight = normalize(positionLight - positionWorld);
 
