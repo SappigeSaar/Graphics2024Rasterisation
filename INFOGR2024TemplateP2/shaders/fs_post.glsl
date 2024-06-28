@@ -18,13 +18,13 @@ void main()
 
 	vec2 red = vec2(aberration, 0.0);
 	vec2 green = vec2(0.0, 0.0);
-	vec2 blue = vec2(-abberation, 0.0);
+	vec2 blue = vec2(-aberration, 0.0);
 
-	vec3 abberatedColor = vec3(texture(pixels, uv + red).r,
+	vec3 aberratedColor = vec3(texture(pixels, uv + red).r,
 								texture(pixels, uv + green).g,
 								texture(pixels, uv + blue).b);
 
-	vec2 offsetPosition = positionFromBottemLeft - vec2(0.5, 0.5);
+	vec2 offsetPosition = positionFromBottomLeft - vec2(0.5, 0.5);
 	float distance = length(offsetPosition);
 
 	float vignette = smoothstep(1.0 - radius, 1.0, distance) * strength;
