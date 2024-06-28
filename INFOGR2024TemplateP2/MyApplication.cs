@@ -39,7 +39,7 @@ namespace Template
             Matrix4 offset = Matrix4.CreateTranslation(0, 0, 40);
 
             // load teapot
-            teapot = new Mesh("../../../assets/teapot.obj", Matrix4.CreateScale(0.25f) * offset, wood1);
+            teapot = new Mesh("../../../assets/teapot.obj", Matrix4.CreateScale(3.0f) * offset, wood1);
             floor = new Mesh("../../../assets/floor.obj", Matrix4.CreateScale(10.0f) * offset, wood2);
             
             scene.AddNode(teapot);

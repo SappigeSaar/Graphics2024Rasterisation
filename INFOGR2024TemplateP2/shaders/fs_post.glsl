@@ -24,7 +24,7 @@ void main()
 								texture(pixels, uv + green).g,
 								texture(pixels, uv + blue).b);
 
-	vec2 offsetPosition = positionFromBottomLeft - vec2(0.5, 0.5);
+	vec2 offsetPosition = positionFromBottomLeft - vec2(0.3, 0.3);
 	float distance = length(offsetPosition);
 
 	float vignette = smoothstep(1.0 - radius, 1.0, distance) * strength;

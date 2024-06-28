@@ -142,9 +142,9 @@ namespace Template
             if (keyboard[Keys.Escape]) terminated = true;
 
             //put all the movement stuff
-            MoveCamera(e);
+            MoveCamera(keyboard);
 
-            RotateCamera();
+            //RotateCamera();
 
         }
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -211,12 +211,13 @@ namespace Template
         /// <summary>
         /// moves the position of the camera around based on WASD keys
         /// </summary>
-        private void MoveCamera(FrameEventArgs e)
+        private void MoveCamera(KeyboardState? keyboard)
         {
-            var keyboard = KeyboardState;
+            //var keyboard = KeyboardState;
             Vector3 cameraTranslation = new Vector3();
 
-            if (keyboard[Keys.W]) cameraTranslation += (0, 0, 0.0001f);
+            if (keyboard[Keys.W]) 
+                cameraTranslation += (0, 0, 0.0001f);
             if (keyboard[Keys.A]) cameraTranslation += (-0.0001f, 0, 0);
             if (keyboard[Keys.S]) cameraTranslation += (0, 0, -0.0001f);
             if (keyboard[Keys.D]) cameraTranslation += (0.0001f, 0, 0);
