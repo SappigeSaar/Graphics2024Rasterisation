@@ -34,8 +34,8 @@ namespace Template
         static MyApplication? app;       // instance of the application
         static bool terminated = false; // application terminates gracefully when this is true
 
-        ScreenQuad? quad;
-        Shader? screenShader;
+        ScreenQuad quad;
+        Shader screenShader;
 
         public OpenTKApp()
             : base(GameWindowSettings.Default, new NativeWindowSettings()
@@ -125,6 +125,7 @@ namespace Template
             base.OnResize(e);
             // called upon window resize. Note: does not change the size of the pixel buffer.
             int retinaScale = isMac ? 2 : 1; // this code assumes all Macs have retina displays
+            app.SceneGraph.screenSize = ClientSize;
             GL.Viewport(0, 0, retinaScale * e.Width, retinaScale * e.Height);
             if (allowPrehistoricOpenGL)
             {

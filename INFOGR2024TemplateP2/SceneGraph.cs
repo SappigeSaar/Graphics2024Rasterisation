@@ -24,14 +24,14 @@ namespace Template
         {
             
             Matrix4 worldToCameraTranslation = Matrix4.CreateTranslation(camera.position);
-            Matrix4 worldToCamerarotation = new(camera.rightDirection.X, camera.rightDirection.Y, camera.rightDirection.Z, 0,
+            Matrix4 worldToCameraRotation = new(camera.rightDirection.X, camera.rightDirection.Y, camera.rightDirection.Z, 0,
                                     camera.upDirection.X, camera.upDirection.Y, camera.upDirection.Z, 0,
                                     camera.inDirection.X, camera.inDirection.Y, camera.inDirection.Z, 0,
                                     0,0,0,1);
 
             Matrix4 cameraToScreen = Matrix4.CreatePerspectiveFieldOfView(FOV, screenSize.X / screenSize.Y, 0.1f, 1000);
 
-            Matrix4 worldToScreen = worldToCameraTranslation * worldToCamerarotation * cameraToScreen;
+            Matrix4 worldToScreen = (worldToCameraTranslation * worldToCameraRotation) * cameraToScreen;
             sceneNode.Render(camera, shader, worldToScreen, Matrix4.Identity);
         }
 

@@ -30,16 +30,11 @@ namespace Template
             Matrix4 objectToWorld = objectToParent * parentTransformation;
             Matrix4 objectToScreen = objectToWorld * worldToScreen;
 
-            //render all the leaves
-            foreach(Node leaf in leaves)
-            {
-                leaf.Render(camera, shader, worldToScreen, objectToWorld);
-            }
+            if (mesh != null) mesh.Render(camera, shader, objectToScreen, objectToWorld);
 
-            if (mesh != null)
-            {
-                mesh.Render(camera, shader, objectToScreen, objectToWorld);
-            }
+            //render all the leaves
+            foreach (Node leaf in leaves) leaf.Render(camera, shader, worldToScreen, objectToWorld);
+
         }
 
         public void AddNode(Node node)

@@ -39,13 +39,13 @@ namespace Template
                 // generate interleaved vertex data array (uv/normal/position per vertex)
                 GL.GenBuffers(1, out vertexBufferId);
                 GL.BindBuffer(BufferTarget.ArrayBuffer, vertexBufferId);
-                if (!OpenTKApp.isMac) GL.ObjectLabel(ObjectLabelIdentifier.Buffer, vertexBufferId, 8 + filename.Length, "VBO for " + filename);
+                /*if (!OpenTKApp.isMac)*/ GL.ObjectLabel(ObjectLabelIdentifier.Buffer, vertexBufferId, 8 + filename.Length, "VBO for " + filename);
                 GL.BufferData(BufferTarget.ArrayBuffer, (IntPtr)(vertices?.Length * Marshal.SizeOf(typeof(ObjVertex))), vertices, BufferUsageHint.StaticDraw);
 
                 // generate triangle index array
                 GL.GenBuffers(1, out triangleBufferId);
                 GL.BindBuffer(BufferTarget.ElementArrayBuffer, triangleBufferId);
-                if (!OpenTKApp.isMac) GL.ObjectLabel(ObjectLabelIdentifier.Buffer, triangleBufferId, 17 + filename.Length, "triangle EBO for " + filename);
+                /*if (!OpenTKApp.isMac)*/ GL.ObjectLabel(ObjectLabelIdentifier.Buffer, triangleBufferId, 17 + filename.Length, "triangle EBO for " + filename);
                 GL.BufferData(BufferTarget.ElementArrayBuffer, (IntPtr)(triangles?.Length * Marshal.SizeOf(typeof(ObjTriangle))), triangles, BufferUsageHint.StaticDraw);
 
                 if (OpenTKApp.allowPrehistoricOpenGL)
@@ -53,7 +53,7 @@ namespace Template
                     // generate quad index array
                     GL.GenBuffers(1, out quadBufferId);
                     GL.BindBuffer(BufferTarget.ElementArrayBuffer, quadBufferId);
-                    if (!OpenTKApp.isMac) GL.ObjectLabel(ObjectLabelIdentifier.Buffer, quadBufferId, 13 + filename.Length, "quad EBO for " + filename);
+                    /*if (!OpenTKApp.isMac)*/ GL.ObjectLabel(ObjectLabelIdentifier.Buffer, quadBufferId, 13 + filename.Length, "quad EBO for " + filename);
                     GL.BufferData(BufferTarget.ElementArrayBuffer, (IntPtr)(quads?.Length * Marshal.SizeOf(typeof(ObjQuad))), quads, BufferUsageHint.StaticDraw);
                 }
             }

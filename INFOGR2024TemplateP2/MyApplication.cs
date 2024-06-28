@@ -12,7 +12,7 @@ namespace Template
         readonly Stopwatch timer = new();       // timer for measuring frame duration
         Shader? shader;                         // shader to use for rendering
         Shader? postproc;                       // shader to use for post processing
-        Texture? wood;                          // texture to use for rendering
+        Texture? wood1, wood2;                          // texture to use for rendering
         RenderTarget? target;                   // intermediate render target
         ScreenQuad? quad;                       // screen filling quad for post processing
         readonly bool useRenderTarget = true;   // required for post processing
@@ -33,13 +33,14 @@ namespace Template
             SceneGraph = new SceneGraph(scene);
 
             // load a texture
-            wood = new Texture("../../../assets/wood.jpg");
+            wood1 = new Texture("../../../assets/wood.jpg");
+            wood2 = new Texture("../../../assets/wood.jpg");
 
             Matrix4 offset = Matrix4.CreateTranslation(0, 0, 40);
 
             // load teapot
-            teapot = new Mesh("../../../assets/teapot.obj", Matrix4.CreateScale(0.25f) * offset, wood);
-            floor = new Mesh("../../../assets/floor.obj", Matrix4.CreateScale(10.0f) * offset, wood);
+            teapot = new Mesh("../../../assets/teapot.obj", Matrix4.CreateScale(0.25f) * offset, wood1);
+            floor = new Mesh("../../../assets/floor.obj", Matrix4.CreateScale(10.0f) * offset, wood2);
             
             scene.AddNode(teapot);
             scene.AddNode(floor);
@@ -88,7 +89,7 @@ namespace Template
                 target.Bind();
 
                 // render scene to render target
-                if (shader != null && wood != null)
+                if (shader != null && wood1 != null && wood2 != null)
                 {
                     SceneGraph.Render(camera, shader);
                     //teapot?.Render(shader, teapotObjectToWorld * worldToCamera * cameraToScreen, teapotObjectToWorld, wood);
@@ -103,7 +104,7 @@ namespace Template
             else
             {
                 // render scene directly to the screen
-                if (shader != null && wood != null)
+                if (shader != null && wood1 != null && wood2 != null)
                 {
                     SceneGraph.Render(camera, shader);
                     //teapot?.Render(shader, teapotObjectToWorld * worldToCamera * cameraToScreen, teapotObjectToWorld, wood);
