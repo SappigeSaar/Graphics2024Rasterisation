@@ -34,7 +34,7 @@ namespace Template
 
             // load a texture
             wood1 = new Texture("../../../assets/wood.jpg");
-            wood2 = new Texture("../../../assets/wood.jpg");
+            wood2 = new Texture("../../../assets/wall.jpg");
 
             Matrix4 offset = Matrix4.CreateTranslation(0, 0, 40);
 
@@ -71,9 +71,11 @@ namespace Template
             float frameDuration = timer.ElapsedMilliseconds;
             timer.Reset();
             timer.Start();
+            //THISIS EVERY FRAME
 
             // prepare matrix for vertex shader
             float angle90degrees = MathF.PI / 2;
+
             //Matrix4 teapotObjectToWorld = Matrix4.CreateScale(0.5f) * Matrix4.CreateFromAxisAngle(new Vector3(0, 1, 0), a);
             //Matrix4 floorObjectToWorld = Matrix4.CreateScale(4.0f) * Matrix4.CreateFromAxisAngle(new Vector3(0, 1, 0), a);
             //Matrix4 worldToCamera = Matrix4.CreateTranslation(new Vector3(0, -14.5f, 0)) * Matrix4.CreateFromAxisAngle(new Vector3(1, 0, 0), angle90degrees);
