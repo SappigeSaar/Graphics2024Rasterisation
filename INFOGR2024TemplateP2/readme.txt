@@ -7,9 +7,9 @@ Tick the boxes below for the implemented features. Add a brief note only if nece
 
 Formalities:
 [X] This readme.txt
-[ ] Cleaned (no obj/bin folders)
-[ ] Demonstration scene(s) with all implemented features
-[ ] (Optional) Screenshots: make it clear which feature is demonstrated in which screenshot
+[X] Cleaned (no obj/bin folders)
+[x] Demonstration scene(s) with all implemented features
+[X] (Optional) Screenshots: make it clear which feature is demonstrated in which screenshot
 
 Minimum requirements implemented:
 [x] Camera: position and orientation controls
@@ -33,8 +33,8 @@ Bonus features implemented:
 [ ] HDR glow: HDR render target, blur in HDR, tone-mapping
 [ ] Depth of field: blur size based on distance from camera, some artifacts allowed
 [ ] Ambient occlusion: darker in tight corners, implemented as screen-space post process
-[X] inverted colors 
-[x] black and white
+[X] inverted colors (see screenshots)
+[x] black and white (see screenshots)
  ...
 
 Notes:
