@@ -54,16 +54,5 @@ namespace Template
             inDirection *= rotation;
         }
 
-        /// <summary>
-        /// rotate viewing direction around Z axis
-        /// </summary>
-        /// <param name="x"></param>
-        public void RotateZ(float x)
-        {
-            Matrix3 rotation = Matrix3.CreateRotationZ(x);
-            upDirection *= rotation;
-            rightDirection *= rotation;
-            inDirection *= rotation;
-        }
     }
 }
